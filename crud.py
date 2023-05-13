@@ -9,6 +9,7 @@ def create_user(email, password):
 
     return user
 
+
 def get_all_users():
     """Returns a list of all users"""
 
@@ -46,6 +47,11 @@ def create_rating(user, movie, score):
 
     return rating
 
+def add_to_database(new_entry):
+    """Add new stuff to db"""
+
+    db.session.add(new_entry)
+    db.session.commit()
 
 
 if __name__ == "__main__":

@@ -39,6 +39,20 @@ def show_users():
 
     return render_template("all_users.html", users=users)
 
+@app.route("/users",methods=["POST"])
+def add_new_user():
+    """Adding new user"""
+    email = request.form.get('email')
+    password = request.form.get('password')
+
+    user = crud.create_user(email,password)
+    crud.add_to_database(user)
+    
+    flash(f"Successfully created useraccount for {email}")
+
+    return redirect("/")
+
+
 @app.route("/users/<user_id>")
 def show_user_details(user_id):
     """Shows details of one user"""
@@ -47,6 +61,9 @@ def show_user_details(user_id):
     ratings = user.ratings
 
     return render_template("user_details.html", user=user, ratings=ratings)
+
+
+
 
 if __name__ == "__main__":
     connect_to_db(app)
