@@ -21,10 +21,18 @@ def get_all_movies():
 
     return Movie.query.all()
 
+def get_movie_by_id(movie_id):
+    """Returns 1 movie"""
+
+    # return Movie.query.filter(Movie.movie_id==movie_id).first()
+
+    return Movie.query.get(movie_id)
+    
 def create_rating(user, movie, score):
     """Create a new rating, given a User instance and a Movie instance."""
 
     rating = Rating(user=user, movie=movie, score=score)
+
 
     return rating
 

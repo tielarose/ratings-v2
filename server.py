@@ -17,10 +17,20 @@ def homepage():
 
 @app.route("/movies")
 def show_movies():
-
+    """Show list of title of all movies"""
+    
     movies = crud.get_all_movies()
 
     return render_template("all_movies.html", movies=movies)
+
+@app.route("/movies/<movie_id>")
+def show_movie_detail(movie_id):
+    """Shows details of one movie"""
+
+    movie = crud.get_movie_by_id(movie_id)
+
+    return render_template("movie_details.html",movie=movie)
+    
 
 if __name__ == "__main__":
     connect_to_db(app)
