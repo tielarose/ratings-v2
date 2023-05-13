@@ -9,6 +9,16 @@ def create_user(email, password):
 
     return user
 
+def get_all_users():
+    """Returns a list of all users"""
+
+    return User.query.all()
+
+def get_user_by_id(user_id):
+    """Returns 1 user profile"""
+
+    return User.query.get(user_id)
+
 def create_movie(title, overview, release_date, poster_path):
     """Create and return a new movie."""
 
