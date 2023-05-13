@@ -45,10 +45,13 @@ def add_new_user():
     email = request.form.get('email')
     password = request.form.get('password')
 
-    user = crud.create_user(email,password)
-    crud.add_to_database(user)
-    
-    flash(f"Successfully created useraccount for {email}")
+    if crud.get_user_by_email(email) is None:
+        user = crud.create_user(email,password)
+        crud.add_to_database(user)
+        flash(f"Successfully created useraccount for {email}")
+        
+    else:
+        flash(f"User already exists")
 
     return redirect("/")
 
