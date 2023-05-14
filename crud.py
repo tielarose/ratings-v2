@@ -52,12 +52,6 @@ def create_rating(user, movie, score):
 
     return rating
 
-def add_to_database(new_entry):
-    """Add new stuff to db"""
-
-    db.session.add(new_entry)
-    db.session.commit()
-
 
 if __name__ == "__main__":
     from server import app

@@ -47,14 +47,14 @@ def add_new_user():
 
     if crud.get_user_by_email(email) is None:
         user = crud.create_user(email,password)
-        crud.add_to_database(user)
+        db.session.add(user)
+        db.session.commit()
         flash(f"Successfully created useraccount for {email}")
         
     else:
         flash(f"User already exists")
 
     return redirect("/")
-
 
 @app.route("/users/<user_id>")
 def show_user_details(user_id):
@@ -65,6 +65,26 @@ def show_user_details(user_id):
 
     return render_template("user_details.html", user=user, ratings=ratings)
 
+@app.route("/login", methods=["POST"])
+def log_in_user():
+    """Log in a user"""
+
+    email = request.form.get("email")
+    password = request.form.get("password")
+
+    user = crud.get_user_by_email(email)
+
+    if user:
+        if user.password == password:
+            session['user'] = user.user_id
+            flash("Successfully logged in!")
+        else:
+            flash("Sorry, email and password do not match")
+    else:
+        flash("No user with that email address")
+
+    return redirect("/")
+    
 
 
 
