@@ -1,0 +1,6 @@
+{% extends 'base.html' %} {% title block %}Rate a Movie{% endblock %}
+
+<form action="/rate">
+  <input type="text" />Rate {{ movie.title }}
+  <input type="number" value="rating" />
+</form>
