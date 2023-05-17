@@ -3,5 +3,20 @@ endblock %} {% block body %}
 <h1>{{ movie.title }}</h1>
 
 <p>{{ movie.overview }}</p>
+<form id="rating_form">
+  <label for="user_rating">Rate this movie </label>
+  <input
+    type="range"
+    min="1"
+    max="5"
+    name="user_rating"
+    value="3"
+    id="user_rating"
+  />
+  <div style="display: none;">{{ movie.movie_id }}</div>
+  <button type="submit">Submit</button>
+</form>
 
-<img src="{{ movie.poster_path }}" /> {% endblock %}
+<img class="movie-poster" style="width: 400px;" src="{{ movie.poster_path }}" />
+<script src="../static/js/functions.js"></script>
+{% endblock %}
